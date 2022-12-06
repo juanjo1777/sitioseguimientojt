@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,10 +13,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('user/{id}',[UserController::class,'show']); 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [PagesController::class,'fnIndex'])->name('xInicio');
+
+Route::post('/', [PagesController::class,'fnRegistrar'])->name('Estudiante.xRegistrar');
+
+Route::put('/actualizar/{id}', [PagesController::class,'fnUpdate'])->name('Estudiante.xUpdate');
+
+Route::get('/actualizar/{id}', [PagesController::class,'fnEstActualizar'])->name('Estudiante.xActualizar') ;
+
+Route::delete('/eliminar/{id}', [PagesController::class,'fnEliminar'])->name('Estudiante.xEliminar') ;
+
+Route::get('/detalle/{id}', [PagesController::class,'fnEstDetalle'])->name('Estudiante.xDetalle') ;
+
+Route::get('/galeria/{numero?}', [PagesController::class,'fnGaleria'])->where('id', '[0-9]+')->name('xGaleria');
+
+Route::get('/lista', [PagesController::class,'fnLista'])->name('xLista') ;
 
 Route::middleware([
     'auth:sanctum',
