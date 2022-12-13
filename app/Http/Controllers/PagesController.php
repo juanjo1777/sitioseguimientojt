@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
+use App\Models\Seguimiento;
 
 class PagesController extends Controller
 {
@@ -16,6 +17,7 @@ class PagesController extends Controller
         return view('Estudiante.pagDetalle',compact('xDetAlumnos'));
 
     }
+    
     public function fnEstActualizar($id){
         $xActAlumnos=Estudiante::findOrFail($id);
         return view('Estudiante.pagActualizar',compact('xActAlumnos')); 
@@ -83,6 +85,73 @@ class PagesController extends Controller
     public function fnLista(){
         $xAlumnos=Estudiante::paginate(4);
         return view('pagLista',compact('xAlumnos'));
+
+    }
+    public function fnSeguimientos(){
+        $xAlumnosseguimiento=Seguimiento::paginate(3);
+        return view('pagSeguimientos',compact ('xAlumnosseguimiento'));
+
+    }
+    public function fnSegDetalle($id){
+        $xDetAlumonosseguimiento=Seguimiento::findOrFail($id);
+        return view('Seguimiento.pagDetalleseg',compact ('xDetAlumonosseguimiento'));
+    
+
+    }
+    public function fnSegRegistrar(Request $request){
+        //return $request;
+
+        $request -> validate([
+            'idEst' =>'required',
+            'traAct' =>'required',
+            'ofiAct' =>'required',
+            'satEst' =>'required',
+            'fecSeg' =>'required',
+            'estSeg' =>'required',
+        ]);
+
+
+        $nuevoEstudianteseg = new Seguimiento;
+
+        $nuevoEstudianteseg->idEst = $request->idEst;
+        $nuevoEstudianteseg->traAct = $request->traAct;
+        $nuevoEstudianteseg->ofiAct = $request->ofiAct;
+        $nuevoEstudianteseg->satEst = $request->satEst;
+        $nuevoEstudianteseg->fecSeg = $request->fecSeg;
+        $nuevoEstudianteseg->estSeg = $request->estSeg;
+    
+
+        $nuevoEstudianteseg->save();
+        //return view('pagLista');
+        return back()->with('msj','Se registro con exito..');
+
+    }
+    public function fnSegActualizar($id){
+        $xActAlumnosseguimiento=Seguimiento::findOrFail($id);
+        return view('Seguimiento.pagActualizarseg',compact('xActAlumnosseguimiento')); 
+    }
+    public function fnUpdateseg(Request $request,$id){
+        //return $request;
+        $xUpdatesegAlumnos=Seguimiento::findOrFail($id);
+
+    
+
+        $xUpdatesegAlumnos->idEst = $request->idEst;
+        $xUpdatesegAlumnos->traAct = $request->traAct;
+        $xUpdatesegAlumnos->ofiAct = $request->ofiAct;
+        $xUpdatesegAlumnos->satEst = $request->satEst;
+        $xUpdatesegAlumnos->fecSeg = $request->fecSeg;
+        $xUpdatesegAlumnos->estSeg = $request->estSeg;
+
+        $xUpdatesegAlumnos->save();
+        //return view('pagLista');
+        return back()->with('msj','Se actualizo con exito..');
+
+    }
+    public function fnSegEliminar($id){
+        $deletesegAlumnos=Seguimiento::findOrFail($id);
+        $deletesegAlumnos->delete();
+        return back()->with('msj','Se elimino con exito..');
 
     }
     public function fnGaleria($numero=0){

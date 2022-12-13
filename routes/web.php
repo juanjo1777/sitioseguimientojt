@@ -18,7 +18,7 @@ use App\Http\Controllers\PagesController;
 
 Route::get('/', [PagesController::class,'fnIndex'])->name('xInicio');
 
-Route::post('/', [PagesController::class,'fnRegistrar'])->name('Estudiante.xRegistrar');
+Route::post('/', [PagesController::class,'fnRegistrar'])->name('Estudiante.xRegistrarlis');
 
 Route::put('/actualizar/{id}', [PagesController::class,'fnUpdate'])->name('Estudiante.xUpdate');
 
@@ -32,7 +32,14 @@ Route::get('/galeria/{numero?}', [PagesController::class,'fnGaleria'])->where('i
 
 Route::get('/lista', [PagesController::class,'fnLista'])->name('xLista') ;
 
-Route::middleware([
+Route::get('/seguimientos', [PagesController::class,'fnSeguimientos'])->name('xSeguimientos') ;
+Route::get('/detalleseg/{id}', [PagesController::class,'fnSegDetalle'])->name('Seguimiento.xDetalleseg') ;
+Route::post('/', [PagesController::class,'fnSegRegistrar'])->name('Seguimiento.xRegistrarseg');
+Route::put('/actualizar/{id}', [PagesController::class,'fnUpdateseg'])->name('Seguimiento.xUpdateseg') ;
+Route::get('/actualizar/{id}', [PagesController::class,'fnSegActualizar'])->name('Seguimiento.xActualizarseg') ;
+Route::delete('/eliminar/{id}', [PagesController::class,'fnSegEliminar'])->name('Seguimiento.xEliminarseg') ;
+
+Route::middleware([ 
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
