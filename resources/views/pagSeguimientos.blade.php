@@ -57,10 +57,8 @@
       <th scope="col">Id</th>
       <th scope="col">Codigo Alumno</th>
       <th scope="col">Trabajo Actual</th>
-      <th scope="col">Oficio Actual</th>
       <th scope="col">Sat Estudiantil</th>
       <th scope="col">Fecha Seg</th>
-      <th scope="col">Est Seguimiento</th>
       <th scope="col">Editar</th>
     </tr>
   </thead>
@@ -75,10 +73,8 @@
       </a>
       </td>
       <td>{{$item->traAct}}</td>
-      <td>{{$item->ofiAct}}</td>
       <td>{{$item->satEst}}</td>
       <td>{{$item->fecSeg}}</td>
-      <td>{{$item->estSeg}}</td>
       <td>
           <form action="{{ route('Seguimiento.xEliminarseg',$item->id) }}" method="post" class="d-inline">
           @method('DELETE')
