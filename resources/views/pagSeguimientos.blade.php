@@ -3,7 +3,7 @@
 
 @section('titulo')
 <p></p>
-  <h1 class=" btn-warning">Pagina de Seguimiento</h1>
+  <h1 class=" btn-warning">Pagina de Seguimiento-Juan Jose Paniura Phocco</h1>
 @endsection
 
 @section('seccion')
